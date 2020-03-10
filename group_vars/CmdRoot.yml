@@ -1,0 +1,19 @@
+---
+# vars file for CmdRoot
+
+###  Commands run as "root" ###
+
+shell:
+#  test commands
+# - command: "cat /etc/passwd"
+# - command: "cat /etc/group"
+
+# Source .profile (DB2) 
+# - command: "cd /export/home"
+# - command: ". ./.profile"
+
+# Read new crontab (DB2) 
+# - command: "cat /root/cronDB2 | crontab -"
+
+# Run resource.ksh (DB2) 
+# - command: "resource.ksh db2inst0"

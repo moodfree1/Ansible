@@ -1,0 +1,9 @@
+---
+# vars file for GrpAdd
+
+group:
+  - name: db2grp0
+    state: absent
+
+  - name: db2grp1
+    state: absent

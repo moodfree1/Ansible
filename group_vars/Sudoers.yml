@@ -1,0 +1,14 @@
+---
+# vars file for Sudoers
+
+users:
+  - path: /etc/sudoers
+    state: present
+    regexp: "^%dmoody ALL="
+    line: "dmoody ALL=(ALL) ALL"
+
+users:
+  - path: /etc/sudoers
+    state: present
+    regexp: "^%dr1-deborahm ALL="
+    line: "dr1-deborahm ALL=(ALL) ALL"

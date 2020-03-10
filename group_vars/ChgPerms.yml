@@ -1,0 +1,24 @@
+---
+# vars file for ChgPerms
+
+files:
+ - path: /export/home/db2inst0
+   state: directory
+   recurse: yes
+   owner: db2inst0
+   group: db2grp0
+   mode: 755 
+
+ - path: /export/home/db2inst1
+   state: directory
+   recurse: yes
+   owner: db2inst1
+   group: db2grp1
+   mode: 755 
+
+# - path: /var/lib/awx
+#   state: directory
+#   recurse: yes
+#   owner: awx
+#   group: awx
+#   mode: 770 

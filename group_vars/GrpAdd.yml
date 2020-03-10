@@ -1,0 +1,7 @@
+---
+# vars file for GrpAdd
+
+group:
+  - name: dtrump
+    state: present
+    gid: 160001

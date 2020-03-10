@@ -1,0 +1,50 @@
+---
+# vars file for test
+
+users:
+  user1:
+    username: mmouse
+    comment: Mickey Mouse
+    uid: 170001
+    group: mmouse
+    groups: 
+    append: yes
+    shell:  /bin/bash
+#    password: "{{ vault_password }}"
+    password: test123
+    update_password: on_create
+    system: no
+    state: present
+    createhome: yes
+    home:  /home/mmouse
+
+  user2:
+    username: dduck
+    comment: Donald Duck
+    uid: 180001
+    group: dduck
+    groups: 
+    append: yes
+    shell:  /bin/bash
+#    password: "{{ vault_password }}"
+    password: test123
+    update_password: on_create
+    system: no
+    state: present
+    createhome: yes
+    home:  /home/dduck
+
+#EXAMPLE:
+#  - username: ansible
+#    comment: Ansible Connection
+#    uid: 3003
+#    group: ansible
+#    groups: 
+#    append: yes
+#    shell:  /bin/bash
+#    password: "{{ vault_password }}"
+#    update_password: on_create
+#    system: no
+#    state: present
+#    createhome: yes
+#    home:  /home/ansible

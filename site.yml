@@ -1,0 +1,3 @@
+---
+ - import_playbook: informatica.yml
+# - import_playbook: db2.yml

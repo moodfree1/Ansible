@@ -1,0 +1,48 @@
+---
+# tasks file for common
+
+ - include_vars:
+     dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+     files_matching: common.yml
+
+# - name: CF-agent
+#   shell: cf-agent --bootstrap linuxtools.chq.ei
+
+# - name: HDPS Client
+#   shell: SIMCallWrapper -OpType="{{ item.OpType }}" -CSHost="{{ item.CSHost }}" -clientname="{{ item.clientname }}" -ClientHostName="{{ item.ClientHostName }}" -subclientPolicy="{{ subclientPolicy }}" -output="{{ item.output }}"
+#   args:
+#     chdir: /opt/hds/Base
+#     executable: /bin/bash
+#   with_items: "{{ HDPS }}"
+
+ - name: list home directories
+   shell: ls -la 
+   register:  homedir_result
+   args:
+     chdir: /export/home
+     executable: /bin/bash
+
+ - debug:
+    var: homedir_result
+
+ - name: list users
+   shell: cat "{{ item.users }}"
+   register:  users_result
+   args:
+     chdir: /etc/
+     executable: /bin/bash
+   with_items: "{{ info }}"
+
+ - debug:
+    var: users_result
+
+ - name: list groups
+   shell: cat "{{ item.groups }}" | grep db
+   register:  groups_result
+   args:
+     chdir: /etc/
+     executable: /bin/bash
+   with_items: "{{ info }}"
+
+ - debug:
+    var: groups_result

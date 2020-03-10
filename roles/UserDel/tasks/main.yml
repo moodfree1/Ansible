@@ -1,0 +1,15 @@
+---
+# tasks file for UserDel
+
+#  tasks:
+  - include_vars:
+      dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+      files_matching: UserDel.yml
+
+  - name: Delete User
+    user:
+      name: "{{ item.username }}"
+      state: "{{ item.state }}"
+      remove: "{{ item.remove }}"
+      force: "{{ item.force }}"
+    with_items: "{{ users }}"

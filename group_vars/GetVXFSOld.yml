@@ -1,0 +1,9 @@
+---
+"ndevice=c3t2d0 odevice=c3t0d0 seq=0"
+devices:
+ - seq: 0
+   ndevice: c3t2d0
+   odevice: c3t0d0
+ - seq: 1
+   ndevice: c3t8d0s2
+   odevice: c3t3d0s2

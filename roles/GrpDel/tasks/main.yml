@@ -1,0 +1,13 @@
+---
+# tasks file for GrpDel
+
+#  tasks:
+  - include_vars:
+      dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+      files_matching: GrpDel.yml
+
+  - name: Delete group
+    group:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+    with_items: "{{ group }}"

@@ -1,0 +1,14 @@
+---
+# vars file for UserDel
+
+users:
+  - username: db2inst0
+    state: absent
+    remove: yes
+    force: yes
+
+  - username: db2inst1
+    state: absent
+    remove: yes
+    force: yes
+    force: yes

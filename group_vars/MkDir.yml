@@ -1,0 +1,51 @@
+---
+# vars file for MkDir
+file:
+ - path: /export/home/db2inst0/scripts
+   state: directory
+   owner: db2inst0
+   group: db2grp0
+   mode: 755 
+   recurse: yes
+
+ - path: /export/home/db2inst0/logs
+   state: directory
+   owner: db2inst0
+   group: db2grp0
+   mode: 755 
+   recurse: yes
+
+ - path: /export/home/db2inst0/config
+   state: directory
+   owner: db2inst0
+   group: db2grp0
+   mode: 755 
+   recurse: yes
+
+ - path: /export/home/db2inst1/scripts
+   state: directory
+   owner: db2inst1
+   group: db2grp1
+   mode: 755 
+   recurse: yes
+
+ - path: /export/home/db2inst1/logs
+   state: directory
+   owner: db2inst1
+   group: db2grp1
+   mode: 755 
+   recurse: yes
+
+ - path: /export/home/db2inst1/config
+   state: directory
+   owner: db2inst1
+   group: db2grp1
+   mode: 755 
+   recurse: yes
+
+ - path: /var/lib/awx/projects/_23__dr1-ansible_dev
+   state: directory
+   owner: awx
+   group: awx
+   mode: 770
+   recurse: yes

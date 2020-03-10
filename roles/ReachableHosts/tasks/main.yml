@@ -1,0 +1,28 @@
+---
+# tasks file to identify reachable hosts
+
+#  tasks:
+
+- name: identify reachable hosts
+  hosts: all
+  remote_user: ansible
+  become: yes
+  become_user: root
+  gather_facts: false
+  ignore_errors: true
+  ignore_unreachable: true
+  tasks:
+    - block:
+        - name: this does nothing
+          shell: exit 1
+          register: result
+      always:
+        - add_host:
+            name: "{{ inventory_hostname }}"
+            group: reachable
+
+- name: Converge
+  hosts: reachable
+  gather_facts: false
+  tasks:
+    - debug: msg="{{ inventory_hostname }} is reachable"

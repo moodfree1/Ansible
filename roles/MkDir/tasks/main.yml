@@ -1,0 +1,16 @@
+---
+# tasks file for MkDir
+
+  - include_vars:
+      dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+      files_matching: MkDir.yml
+
+  - name: Creates directory
+    file:
+      path="{{ item.path }}"
+      state="{{ item.state }}"
+      owner="{{ item.owner }}"
+      group="{{ item.group }}"
+      mode="{{ item.mode }}"
+      recurse="{{ item.recurse }}"
+    with_items: "{{ file }}"

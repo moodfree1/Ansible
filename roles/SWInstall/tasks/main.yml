@@ -1,0 +1,33 @@
+---
+# tasks file for SWInstall
+
+#  tasks:
+
+  - include_vars:
+      dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+      files_matching: SWInstall.yml
+
+  - name: install the latest version of Apache
+    yum:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+    with_items: "{{ pkgs }}"
+
+  - name: install one specific version of Apache
+    yum:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+    with_items: "{{ pkgs }}"
+
+  - name: upgrade all packages, excluding kernel & foo related packages
+    yum:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+      exclude: "{{ item.exclude }}"
+    with_items: "{{ pkgs }}"
+
+  - name: install the nginx rpm from a remote repo
+    yum:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+    with_items: "{{ pkgs }}"

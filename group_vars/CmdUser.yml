@@ -1,0 +1,11 @@
+---
+# vars file for CmdUser
+
+###  Commands run as "user" ###
+
+shell:
+# - command: "cat /etc/passwd"
+# - command: "cat /etc/group"
+ - command: "cat /home/dr1-deborahm/test1"
+ - command: "cat /home/dr1-deborahm/test2"
+ - command: "cat /home/dr1-deborahm/test3"

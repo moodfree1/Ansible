@@ -1,0 +1,16 @@
+---
+# vars file for SWInstall
+
+pkgs:
+  - name: httpd, httpd-tools
+    state: latest
+
+#  - name: httpd-2.2.29-1.4.amzn1
+#    state: present
+
+  - name: "*"
+    state: latest
+    exclude: kernel*, foo*
+
+  - name: http://nginx.org/packages/centos/7/noarch/RPMS/nginx-nr-agent-2.0.0-11.el7.ngx.noarch.rpm
+    state: present

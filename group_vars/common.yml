@@ -1,0 +1,14 @@
+---
+# vars file for common
+
+HDPS:
+ - OpType: 1000
+   CSHost: chq-commserv.chq.ei
+   clientname: infaapp02-n7.dr1
+   ClientHostName: infaapp02-n7.dr1.ei
+   subclientPolicy: Solaris/Linux - DR1 Production
+   output: /tmp/reg_output.xml
+
+info:
+ - users: passwd
+   groups: group

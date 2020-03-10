@@ -1,0 +1,10 @@
+#
+# crontab for db2inst0
+#
+# dd-mmm-yyyy (dba_id) file created
+#
+05 01 * * * . $HOME/.profile; $SCRIPTS/db2_nightly.sh  >$LOGS/db2_nightly_$RDATE\_$RTIME.log 2>&1
+00 11 * * * . $HOME/.profile; $SCRIPTS/db2backups.sh   >$LOGS/db2backups_$RDATE\_$RTIME.log 2>&1
+00 20 * * * . $HOME/.profile; $SCRIPTS/db2_runstats.sh >$LOGS/db2_runstats_$RDATE\_$RTIME.log 2>&1
+#
+53 * * * *  . $HOME/.profile; $SCRIPTS/db2_hourly.sh   >>$LOGS/db2_hourly_$RDATE.log 2>&1

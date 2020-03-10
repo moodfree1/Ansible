@@ -1,0 +1,76 @@
+---
+# tasks file for GetLVMdata
+# - name: get old name
+#   shell: "multipath  -ll | grep 'mpath\\|sd' | awk '{NF--; print}'|grep -i {{odevice}}"
+#   args:
+#     executable: /bin/bash
+
+- name: get old name
+  shell: "multipath  -ll | grep 'mpath\\|sd' | grep -i {{odevice}}| awk '{print $1}'|tr -d '()'"
+  args:
+    executable: /bin/bash
+  register: oDevi
+- set_fact:
+   oDeviLine="oDevice":"{{ oDevi.stdout }}",
+
+- name: get old name
+  shell: "multipath  -ll | grep 'mpath\\|sd' | grep -i {{ndevice}}| awk '{print $1}'|tr -d '()'"
+  args:
+    executable: /bin/bash
+  register: nDevi
+- set_fact:
+   nDeviLine="nDevice":"{{ nDevi.stdout }}",
+
+- name: get old 
+  shell: "multipath  -ll | grep 'mpath\\|sd' | grep -i {{odevice}}| awk '{print $1}'"
+  args:
+    executable: /bin/bash
+  register: mPath
+- set_fact:
+   mPathLine="path":"{{ mPath.stdout }}",
+
+- name: get old 
+  shell: "pvdisplay /dev/mapper/{{mPath.stdout}}* 2>/dev/null | grep VG | awk '{print $3}'"
+  args:
+    executable: /bin/bash
+  register: vg
+- set_fact:
+   vgLine="volGroup":"{{ vg.stdout }}",
+
+#- name: get old 
+#  shell: "lvdisplay {{vg.stdout}} | grep 'LV Path' | awk '{print $3}'"
+#  args:
+#    executable: /bin/bash
+#  register: vn
+#- set_fact:
+#   vnLine="volName":"{{ vn.stdout }}",
+
+- name: get old 
+  shell: "lvdisplay {{vg.stdout}} | grep 'LV Name' | awk '{print $3}'"
+  args:
+    executable: /bin/bash
+  register: vn
+- set_fact:
+   vnLine="vN":"{{ vn.stdout }}",
+
+- name: get old 
+  shell: "lsblk /dev/mapper/{{mPath.stdout}} | grep {{ vg.stdout}} | awk '{print $8}'"
+  args:
+    executable: /bin/bash
+  register: mp
+- set_fact:
+   mpLine="mountName":"{{ mp.stdout }}"}
+
+- set_fact:
+   devLine="Device{{ seq }}":{
+- set_fact:
+   DEVEndLine="}"
+
+
+- debug: msg="{{devLine}}\n
+           {{ oDeviLine }}\n
+           {{ nDeviLine }}\n
+           {{ mPathLine }}\n
+           {{ vgLine }}\n
+           {{ vnLine }}\n
+           {{ mpLine }}\n"

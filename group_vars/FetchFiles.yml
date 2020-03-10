@@ -1,0 +1,8 @@
+---
+# vars file for FetchFiles---
+
+files:
+
+ - src: /home/dr1-deborahm/test1
+   dest: /var/lib/awx/projects/_23__dr1_ansible_dev/files/
+   flat: yes

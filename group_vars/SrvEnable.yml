@@ -1,0 +1,6 @@
+---
+# vars file for SrvEnable
+
+service:
+  - name: httpd
+    state: started

@@ -1,0 +1,14 @@
+---
+# tasks file for FetchFiles
+
+#  tasks:
+  - include_vars:
+      dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+      files_matching: FetchFiles.yml
+
+  - name: Fetch file from remote host
+    fetch:
+      src="{{ item.src }}"
+      dest="{{ item.dest }}"
+      flat="{{ item.flat }}"
+    with_items: "{{ files }}"

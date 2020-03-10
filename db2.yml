@@ -1,0 +1,20 @@
+---
+ - name:  apply configuration to db2 servers
+   hosts: all
+   become: True
+   become_method: sudo
+   become_user: dmoody
+#   become_ask_pass: True
+   remote_user: dmoody
+
+   roles:
+#     - GrpAdd
+#     - UserAdd
+#     - common
+#     - CpFiles
+#     - MkDir
+#     - ChgPerms
+#     - CmdRoot
+     - CmdUser
+#     - UserDel
+#     - GrpDel

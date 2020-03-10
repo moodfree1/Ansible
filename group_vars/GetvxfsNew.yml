@@ -1,0 +1,19 @@
+---
+# vars file for CmdRoot
+
+###  Commands run as "root" ###
+
+shell:
+#  test commands
+ - command: "vxprint -htg internaldb2_01-db2inst1dg | grep vol_db2_dbpath | grep sd |sed -e's/  */ /g'| cut -d" " -f 8"
+ - command: "vxdisk -eo alldgs list | grep tagmastore-usp0_33"
+
+# Source .profile (DB2) 
+# - command: "cd /export/home"
+# - command: ". ./.profile"
+
+# Read new crontab (DB2) 
+# - command: "cat /root/cronDB2 | crontab -"
+
+# Run resource.ksh (DB2) 
+# - command: "resource.ksh db2inst0"

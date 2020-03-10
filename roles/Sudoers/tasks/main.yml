@@ -1,0 +1,18 @@
+---
+# tasks file for adding users to Sudoers file"
+
+#  tasks:
+  - include_vars:
+      dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+      files_matching: Sudoers.yml
+
+  - name: Create sudoers file backup
+    shell: cp -f /etc/sudoers /etc/sudoers.bak
+
+  - name: Add user to sudo
+    lineinfile:
+      path: "{{ item.path }}" 
+      state: present
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    with_items: "{{ users }}"

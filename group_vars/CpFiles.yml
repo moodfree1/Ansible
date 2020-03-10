@@ -1,0 +1,17 @@
+---
+# vars file for CpFiles---
+
+files:
+# - src: /var/lib/awx/projects/_23__dr1_ansible_dev/files/ulimits
+#   dest: /etc/ulimits
+#   owner: root
+#   group: wheel
+#   mode: 644
+#   backup: yes
+
+ - src: /var/lib/awx/projects/_23__dr1_ansible_dev/files/authorized_keys
+   dest: /home/dtrump/.ssh/
+   owner: dtrump
+   group: dtrump
+   mode: 600
+   backup: yes

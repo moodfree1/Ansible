@@ -1,0 +1,33 @@
+---
+# vars file for UserAdd
+
+users:
+
+#EXAMPLE:
+#  - username: ansible
+#    comment: Ansible Connection
+#    uid: 3003
+#    group: ansible
+#    groups: 
+#    append: yes
+#    shell:  /bin/bash
+#    password: "{{ vault_password }}"
+#    update_password: on_create
+#    system: no
+#    state: present
+#    createhome: yes
+#    home:  /home/ansible
+
+  - username: dtrump
+    comment: Donald Trump
+    uid: 160001
+    group: dtrump
+    groups: 
+    append: yes
+    shell:  /bin/bash
+    password: "{{ vault_password }}"
+    update_password: on_create
+    system: no
+    state: present
+    createhome: yes
+    home:  /home/dtrump

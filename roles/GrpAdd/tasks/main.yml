@@ -1,0 +1,14 @@
+---
+# tasks file for GrpAdd
+
+#  tasks:
+  - include_vars:
+      dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+      files_matching: GrpAdd.yml     
+
+  - name: Create Group
+    group:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+      gid: "{{ item.gid }}"
+    with_items: "{{ group }}"

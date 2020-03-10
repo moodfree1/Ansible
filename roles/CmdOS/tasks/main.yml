@@ -1,0 +1,30 @@
+---
+# tasks file for CmdOS
+
+ - include_vars:
+     dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+     files_matching: CmdOS.yml
+
+ - name: Run commands
+   shell: "{{ item.command }}"
+   when:
+     - ansible_facts['os_family'] == "RedHat"
+     - ansible_facts['distribution'] == "CentOS"
+     - ansible_facts['distribution_major_version'] == "6"
+   register: result
+   args:
+#     chdir: /export/home
+     executable: /bin/bash
+   with_items: "{{ shell }}"
+
+ - name: Fail Message
+   fail:
+     msg: "The role is designed only for CentOS 6"
+   when:
+     - ansible_facts['os_family'] == "RedHat"
+     - ansible_facts['distribution'] == "CentOS"
+     - ansible_facts['distribution_major_version'] != "6"
+
+ - debug:
+#     msg: "{{ result.results | map(attribute='stdout') | list | to_nice_json }}"
+     msg: "{{ result.results | json_query('[].stdout[]') | list }}"

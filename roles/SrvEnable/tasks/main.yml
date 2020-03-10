@@ -1,0 +1,14 @@
+---
+# tasks file for SrvEnable
+
+#  tasks:
+
+  - include_vars:
+      dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+      files_matching: SrvEnable.yml
+
+  - name: Make sure a service is running
+    systemd:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+    with_items: "{{ service }}"

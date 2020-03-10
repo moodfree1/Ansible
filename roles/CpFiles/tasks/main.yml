@@ -1,0 +1,17 @@
+---
+# tasks file for CpFiles
+
+#  tasks:
+  - include_vars:
+      dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+      files_matching: CpFiles.yml
+
+  - name: Copy file to remote host, making backup, setting owner, group, and mode.
+    copy:
+      src="{{ item.src }}"
+      dest="{{ item.dest }}"
+      owner="{{ item.owner }}"
+      group="{{ item.group }}"
+      mode="{{ item.mode }}"
+      backup="{{ item.backup }}"
+    with_items: "{{ files }}"

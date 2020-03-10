@@ -1,0 +1,13 @@
+---
+# tasks file for GetFacts
+
+  - name: Get Facts for DRST Reviews
+    setup:
+        gather_subset=all
+    register: facts
+
+  - debug:
+      msg: "{{ facts.ansible_facts.ansible_fqdn }} |
+      {{ facts.ansible_facts.ansible_product_name }} |data|data|
+      {{ facts.ansible_facts.ansible_distribution }} 
+      {{ facts.ansible_facts.ansible_distribution_version }} |data|data|data|data|data|data|"

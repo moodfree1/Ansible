@@ -1,0 +1,20 @@
+---
+# tasks file for CmdUser
+
+ - include_vars:
+     dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+     files_matching: CmdUser.yml
+
+ - name: Run commands
+   shell: "{{ item.command }}"
+   register:  command_result
+   args:
+#     chdir: /export/home
+     executable: /bin/bash
+   with_items: "{{ shell }}"
+
+ - local_action: copy content={{ command_result}} dest=/var/lib/awx/projects/_23__dr1_ansible_dev/files/test.out
+
+ - debug:
+    var: command_result
+

@@ -1,0 +1,21 @@
+---
+# tasks file for GetVXFSNew
+
+ - name: Run commands
+   shell: "/usr/sbin/vxprint -htg internaldb2_01-db2inst1dg | grep vol_db2_dbpath | grep sd |sed -e's/  */ /g'| cut -d\" \" -f 8"
+   args:
+     executable: /bin/bash
+   register: new_name
+
+ - name: get new data
+   shell: "/usr/sbin/vxdisk -eo alldgs list | grep \"{{ new_name.stdout}}\" | sed -e's/  */ /g'| cut -d\" \" -f2,7 | cut -d\\: -f2"
+   args:
+     executable: /bin/bash
+   register: new_items
+
+
+ - debug: 
+     msg: nDevice = {{ new_items.stdout_lines }} 
+ - debug: 
+     msg: nName = {{ new_name.stdout_lines }}
+...

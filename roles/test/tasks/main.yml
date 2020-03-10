@@ -1,0 +1,38 @@
+---
+# tasks file for UserAdd
+
+#  tasks:
+  - include_vars:
+      dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+      files_matching: test.yml
+#      ignore_files: [UserAdd.yml, UserDel.yml, Sudoers.yml]
+#      extensions: [yml]
+
+#  - name: Add Several Users
+#    user:
+#      name: "{{ item.username }}"
+#      comment: "{{ item.comment }}"
+#      uid: "{{ item.uid }}"
+#      group: "{{ item.group }}"
+#      groups: "{{ item.groups }}"
+#      append: "{{ item.append }}"
+#      shell: "{{ item.shell }}"
+#      password: "{{ item.password }}"
+#      update_password: "{{ item.update_password }}"
+#      system: "{{ item.system }}"
+#      state: "{{ item.state }}"
+#      createhome: "{{ item.createhome }}"
+#      home: "{{ item.home }}"
+#    with_items:
+#      - "{{ users }}"
+
+#  - name: Expiring password for user "{{ uusername }}"
+#    shell: chage -d 0 "{{ item.username }}"
+#    with_items:
+#      - "{{ users }}"
+
+  - name: print user info 
+    debug:
+      msg: "User {{ item.key }} is {{ item.value.username }} ({{ item.value.comment }}) ({{ item.value.uid }}) ({{ item.value.group }}) ({{ item.value.groups }}) ({{ item.value.append }}) ({{ item.value.shell }}) ({{ item.value.password }}) ({{ item.value.update_password }}) ({{ item.value.system }}) ({{ item.value.state }}) ({{ item.value.createhome }}) ({{ item.value.home }}) "
+    with_dict:
+      - "{{ users }}"

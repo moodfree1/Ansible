@@ -1,0 +1,32 @@
+---
+# tasks file for UserAdd
+
+#  tasks:
+  - include_vars:
+      dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+#      files_matching: UserAdd.yml
+      ignore_files: [UserDel.yml, Sudoers.yml]
+      extensions: [yml]
+
+  - name: Add User
+    user:
+      name: "{{ item.username }}"
+      comment: "{{ item.comment }}"
+      uid: "{{ item.uid }}"
+      group: "{{ item.group }}"
+      groups: "{{ item.groups }}"
+      append: "{{ item.append }}"
+      shell: "{{ item.shell }}"
+      password: "{{ item.password }}"
+      update_password: "{{ item.update_password }}"
+      system: "{{ item.system }}"
+      state: "{{ item.state }}"
+      createhome: "{{ item.createhome }}"
+      home: "{{ item.home }}"
+    with_items:
+      - "{{ users }}"
+
+  - name: Expiring password for user "{{ uusername }}"
+    shell: chage -d 0 "{{ item.username }}"
+    with_items:
+      - "{{ users }}"

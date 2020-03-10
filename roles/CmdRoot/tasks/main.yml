@@ -1,0 +1,17 @@
+---
+# tasks file for CmdRoot
+
+ - include_vars:
+     dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+     files_matching: CmdRoot.yml
+
+ - name: Run commands
+   shell: "{{ item.command }}"
+   register:  command_result
+   args:
+#     chdir: /export/home
+     executable: /bin/bash
+   with_items: "{{ shell }}"
+
+ - debug:
+    var: command_result

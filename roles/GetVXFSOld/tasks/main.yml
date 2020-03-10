@@ -1,0 +1,126 @@
+---
+# tasks file for GetVXFSNew
+- name: get old name
+  shell: '/usr/sbin/vxdctl enable'
+  args:
+    executable: /bin/bash
+
+- name: get old name
+  shell: "/usr/sbin/vxdisk -eo alldgs list | grep {{ odevice }} | awk '{print $(NF-1)}'"
+  args:
+    executable: /bin/bash
+  register: oDevi
+- set_fact: 
+   oDeviLine="oDevice":"{{ oDevi.stdout }}",
+
+- name: get old format
+  shell: "/usr/sbin/vxdisk -eo alldgs list | grep {{ odevice }} |  awk '{ print $2 }' | cut -d\\: -f2"
+  args:
+    executable: /bin/bash
+  register: oFormat
+- set_fact:
+   typeLine="type":"{{ oFormat.stdout }}",
+
+- name: get old diskgroup
+  shell: "/usr/sbin/vxdisk -eo alldgs list | grep {{ odevice }} |  awk '{ print $4 }'"
+  args:
+    executable: /bin/bash
+  register: diskGroup
+- set_fact:
+   diskGroupLine="diskGroup":"{{ diskGroup.stdout }}",
+
+- name: get old disk
+  shell: "/usr/sbin/vxdisk -eo alldgs list | grep {{ odevice }} |  awk '{ print $3 }'"
+  args:
+    executable: /bin/bash
+  register: oName
+- set_fact:
+   oNameLine="oName":"{{ oName.stdout }}",
+
+- name: get old vxdev
+  shell: "/usr/sbin/vxdisk -eo alldgs list | grep {{ odevice }} |  awk '{ print $1 }'"
+  args:
+    executable: /bin/bash
+  register: oDev
+- set_fact:
+   oDevLine="oDev":"{{ oDev.stdout }}",
+
+- name: get plex
+  shell: "/usr/sbin/vxprint -htg {{ diskGroup.stdout }} | grep sd | grep {{ oName.stdout }} |  awk '{ print $3 }' "
+  args:
+    executable: /bin/bash
+  register: plex
+
+- name: sf1
+  set_fact: 
+    plexList="{{ item }}"
+  loop: "{{ plex.stdout_lines }}"
+  register: plexListOut
+- name: sf2
+  set_fact:
+    plexOutLine="{{ plexListOut.results | map(attribute='ansible_facts.plexList') | list }}"
+
+- set_fact:  
+    plexs="{% for i in plex.stdout_lines%}{{i}}{% if not loop.last %}|{% endif %}{%endfor%}"
+
+- name: get volume
+  shell: "/usr/sbin/vxprint -htg {{ diskGroup.stdout }} | grep pl | egrep '{{ plexs }}' |  awk '{ print $3 }' "
+  args:
+    executable: /bin/bash
+  #loop: "{{ plex.stdout_lines }}"
+  register: volNames
+
+- name: sf1
+  set_fact: 
+    volList="{{ item }}"
+  loop: "{{ volNames.stdout_lines }}"
+  register: volListOut
+- name: sf2
+  set_fact:
+    volOutLine="{{volListOut.results | map(attribute='ansible_facts.volList') | list}}"
+
+- name: get old name
+  shell: "/usr/sbin/vxdisk -eo alldgs list | grep {{ ndevice }} | awk '{print $(NF-1)}'"
+  args:
+    executable: /bin/bash
+  register: nDev
+- set_fact:
+   nDevLine="nDevice":"{{ nDev.stdout }}",
+
+- name: get new name
+  shell: '/usr/sbin/vxdisk -eo alldgs list | grep {{ ndevice }} |sed -e''s/  */ /g'' | cut -d" " -f1'
+  args:
+    executable: /bin/bash
+  register: nName
+- set_fact:
+   nNameLine="nName":"{{ nName.stdout }}"\n},
+
+
+- set_fact:
+   devLine="Device{{ seq }}":{
+- set_fact:
+   diskNameLine="diskName":"F800_",
+- set_fact:
+   MoreDEVEndLine="},"
+- set_fact:
+    plexH="plex":\n
+- set_fact:
+    volH="volumes":\n
+
+      
+#          "volumes": {"v0":"{{ volume.stdout_lines }}"},
+- debug: msg="{{ devLine }}\n
+          {{ oDeviLine }}\n
+          {{ oNameLine }}\n
+          {{ oDevLine }}\n
+          {{ typeLine }}\n
+          {{ diskGroupLine }}\n
+          {{ diskNameLine }}\n
+          {{ plexH }}\n
+          {{ plexOutLine|to_nice_json }},\n
+          {{ volH }}\n
+          {{ volOutLine|to_nice_json }},\n
+          {{ nDevLine }}\n
+          {{ nNameLine }}"
+
+
