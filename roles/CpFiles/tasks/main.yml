@@ -3,7 +3,7 @@
 
 #  tasks:
   - include_vars:
-      dir: /var/lib/awx/projects/_23__dr1_ansible_dev/group_vars
+      dir: /home/dmoody/ansible_code/Ansible/group_vars
       files_matching: CpFiles.yml
 
   - name: Copy file to remote host, making backup, setting owner, group, and mode.
